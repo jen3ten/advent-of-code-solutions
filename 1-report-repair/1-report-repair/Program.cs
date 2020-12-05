@@ -6,39 +6,34 @@ namespace _1_report_repair
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            int targetSum = 2020;
+            Console.WriteLine($"Hello!  I will find the 2 numbers from this list of 200 that sum to {targetSum}\n");
 
             string[] input = System.IO.File.ReadAllLines(@"C:\Users\jenev\source\repos\Practice\advent-of-code\1-report-repair\input.txt");
             int inputLength = input.Length;
-            Console.WriteLine($"length: {inputLength}");
 
-            //foreach(string item in input)
-            //{
-            //    Console.WriteLine(item);
-            //}
-
-            //bool success = false;
-            int solution = 0;
+            bool continueSearching = true;
+            int product = 0;
             int inputA = 0;
             int inputB = 0;
 
-            for (int a = 0; a < inputLength - 1; a++)
+            for (int a = 0; (a < inputLength - 1) && continueSearching; a++)
             {
                 inputA = Convert.ToInt32(input[a]);
 
-                for(int b = a + 1; b < inputLength; b++)
+                for(int b = a + 1; (b < inputLength) && continueSearching; b++)
                 {
                     inputB = Convert.ToInt32(input[b]);
 
-                    if(inputA + inputB == 2020)
+                    if(inputA + inputB == targetSum)
                     {
-                        //success = true;
-                        solution = inputA * inputB;
+                        continueSearching = false;
+                        product = inputA * inputB;
                     }
                 }
             }
 
-            Console.WriteLine($"a: {inputA}, b: {inputB}, product: {solution}");
+            Console.WriteLine($"first number: {inputA}, second number: {inputB}, product: {product}");
         }
     }
 }
